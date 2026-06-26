@@ -24,7 +24,10 @@ class SandboxPage extends StatelessWidget {
           Switch(value: showSemanticsDebugger, onChanged: onToggleSemantics),
         ],
       ),
-      body: Padding(padding: const EdgeInsets.all(16), child: child),
+      body: SingleChildScrollView(
+        padding: const EdgeInsets.all(16),
+        child: child,
+      ),
     );
   }
 }

@@ -1,7 +1,7 @@
-// lib/pages/button_page.dart
-
 import 'package:flutter/material.dart';
 import '../widgets/sandbox_page.dart';
+import '../widgets/code_snippet_template.dart';
+import '../widgets/at_description_template.dart';
 
 class ButtonPage extends StatefulWidget {
   const ButtonPage({
@@ -20,7 +20,6 @@ class ButtonPage extends StatefulWidget {
 }
 
 class _ButtonPageState extends State<ButtonPage> {
-  // This widget is the root of your page.
   @override
   Widget build(BuildContext context) {
     return SandboxPage(
@@ -30,7 +29,9 @@ class _ButtonPageState extends State<ButtonPage> {
       child: Column(
         spacing: 24,
         children: [
-          // Section Intro Text
+          // ---------------------------------------------------------------------------
+          // Icon Buttons
+          // ---------------------------------------------------------------------------
           Semantics(
             header: true,
             child: Text(
@@ -39,20 +40,32 @@ class _ButtonPageState extends State<ButtonPage> {
             ),
           ),
 
-          // Column examples
           Row(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              // Left side
+              // IconButton: Tooltip only
               Expanded(
                 child: Column(
                   spacing: 16,
                   children: [
-                    const Text('No Semantics'),
                     IconButton(
                       icon: const Icon(Icons.color_lens),
                       tooltip: 'Change Background Color',
                       onPressed: widget.onChangeTheme,
+                    ),
+                    const ATDescriptionTemplate(
+                      icon: Icons.check_circle_outline_outlined,
+                      iconStyle: IconThemeData(color: Colors.green),
+                      description: 'Tooltip only',
+                      ios: 'TODO',
+                      chrome: 'TODO',
+                      safari: 'TODO',
+                    ),
+                    const CodeSnippetTemplate(
+                      code: '''IconButton(
+  icon: Icon(Icons.color_lens),
+  tooltip: 'Change Background Color',
+)''',
                     ),
                   ],
                 ),
@@ -60,33 +73,122 @@ class _ButtonPageState extends State<ButtonPage> {
 
               const SizedBox(width: 24),
 
-              // Right side
+              // IconButton: Semantics only
               Expanded(
                 child: Column(
                   spacing: 16,
                   children: [
-                    const Text('With Semantics'),
                     Semantics(
-                      label: 'Change Background With Semantics No Tooltip',
+                      label: 'Change Background Color',
+                      child: IconButton(
+                        icon: const Icon(Icons.color_lens_sharp),
+                        onPressed: widget.onChangeTheme,
+                      ),
+                    ),
+                    const ATDescriptionTemplate(
+                      icon: Icons.warning_amber_rounded,
+                      iconStyle: IconThemeData(color: Colors.red, size: 16),
+                      description: 'Semantics',
+                      descriptionStyle: TextStyle(color: Colors.red),
+                      ios: 'TODO',
+                      chrome: 'TODO',
+                      safari: 'TODO',
+                    ),
+                    const CodeSnippetTemplate(
+                      code: '''Semantics(
+  label: 'Change Background Color',
+  child: IconButton(
+    icon: Icon(Icons.color_lens_sharp),
+  ),
+)''',
+                    ),
+                  ],
+                ),
+              ),
+
+              const SizedBox(width: 24),
+
+              // IconButton: Semantics + role
+              Expanded(
+                child: Column(
+                  spacing: 16,
+                  children: [
+                    Semantics(
+                      label: 'Change Background Color',
                       button: true,
                       child: IconButton(
                         icon: const Icon(Icons.color_lens_sharp),
                         onPressed: widget.onChangeTheme,
                       ),
                     ),
+                    const ATDescriptionTemplate(
+                      icon: Icons.warning_amber,
+                      iconStyle: IconThemeData(color: Colors.red, size: 16),
+                      description: 'Semantics + Role',
+                      descriptionStyle: TextStyle(color: Colors.red),
+                      ios: 'TODO',
+                      chrome: 'TODO',
+                      safari: 'TODO',
+                    ),
+                    const CodeSnippetTemplate(
+                      code: '''Semantics(
+  label: 'Change Background Color',
+  button: true,
+  child: IconButton(
+    icon: Icon(Icons.color_lens_sharp),
+  ),
+)''',
+                    ),
                   ],
                 ),
               ),
 
               const SizedBox(width: 24),
 
+              // IconButton: Semantics + tooltip
               Expanded(
                 child: Column(
                   spacing: 16,
                   children: [
-                    const Text('With Both Semantics and Tooltip'),
                     Semantics(
-                      label: 'Change Background With Semantics and Tooltip',
+                      label: 'Change the color of the pages background',
+                      child: IconButton(
+                        icon: const Icon(Icons.color_lens),
+                        tooltip: 'Change Background Color',
+                        onPressed: widget.onChangeTheme,
+                      ),
+                    ),
+                    const ATDescriptionTemplate(
+                      icon: Icons.warning_amber,
+                      iconStyle: IconThemeData(color: Colors.red, size: 16),
+                      description: 'Semantics + Tooltip',
+                      descriptionStyle: TextStyle(color: Colors.red),
+                      ios: 'TODO',
+                      chrome: 'TODO',
+                      safari: 'TODO',
+                    ),
+                    const CodeSnippetTemplate(
+                      code: '''Semantics(
+  label: 'Change the color of the pages background',
+  child: IconButton(
+    icon: Icon(Icons.color_lens),
+    tooltip: 'Change Background Color',
+  ),
+)''',
+                    ),
+                  ],
+                ),
+              ),
+
+              const SizedBox(width: 24),
+
+              // IconButton: Semantics + role + tooltip
+              Expanded(
+                child: Column(
+                  spacing: 16,
+                  children: [
+                    Semantics(
+                      label: 'Change the color of the pages background',
                       button: true,
                       child: IconButton(
                         icon: const Icon(Icons.color_lens),
@@ -94,13 +196,34 @@ class _ButtonPageState extends State<ButtonPage> {
                         onPressed: widget.onChangeTheme,
                       ),
                     ),
+                    const ATDescriptionTemplate(
+                      icon: Icons.info_outline_rounded,
+                      iconStyle: IconThemeData(color: Colors.orange),
+                      description: 'Semantics + Role + Tooltip',
+                      descriptionStyle: TextStyle(color: Colors.orange),
+                      ios: 'TODO',
+                      chrome: 'TODO',
+                      safari: 'TODO',
+                    ),
+                    const CodeSnippetTemplate(
+                      code: '''Semantics(
+  label: 'Change the color of the pages background',
+  button: true,
+  child: IconButton(
+    icon: Icon(Icons.color_lens),
+    tooltip: 'Change Background Color',
+  ),
+)''',
+                    ),
                   ],
                 ),
               ),
             ],
           ),
 
-          // Section Intro Text
+          // ---------------------------------------------------------------------------
+          // Text Buttons
+          // ---------------------------------------------------------------------------
           Semantics(
             header: true,
             child: Text(
@@ -112,35 +235,28 @@ class _ButtonPageState extends State<ButtonPage> {
           Row(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              // Left side
+              // ElevatedButton: Native button text only
               Expanded(
                 child: Column(
                   spacing: 16,
                   children: [
-                    const Text('No Semantics'),
                     ElevatedButton(
                       onPressed: widget.onChangeTheme,
                       child: const Text('Change Background'),
                     ),
-                  ],
-                ),
-              ),
 
-              const SizedBox(width: 24),
-
-              // Right side
-              Expanded(
-                child: Column(
-                  spacing: 16,
-                  children: [
-                    const Text('With Semantics'),
-                    Semantics(
-                      label: 'Change Background With Semantics No Tooltip',
-                      button: true,
-                      child: ElevatedButton(
-                        onPressed: widget.onChangeTheme,
-                        child: const Text('Change Background'),
-                      ),
+                    const ATDescriptionTemplate(
+                      description: 'No semantics',
+                      icon: Icons.check_circle_outline_outlined,
+                      iconStyle: IconThemeData(color: Colors.green),
+                      ios: 'TODO',
+                      chrome: 'TODO',
+                      safari: 'TODO',
+                    ),
+                    const CodeSnippetTemplate(
+                      code: '''ElevatedButton(
+  child: Text('Change Background'),
+)''',
                     ),
                   ],
                 ),
@@ -148,18 +264,110 @@ class _ButtonPageState extends State<ButtonPage> {
 
               const SizedBox(width: 24),
 
+              // ElevatedButton: Semantics
               Expanded(
                 child: Column(
                   spacing: 16,
                   children: [
-                    const Text('With Both Semantics and Tooltip'),
                     Semantics(
-                      label: 'Change Background With Semantics and Tooltip',
+                      label: 'Change the color of the pages background',
+                      child: ElevatedButton(
+                        onPressed: widget.onChangeTheme,
+                        child: const Text('Change Background'),
+                      ),
+                    ),
+
+                    const ATDescriptionTemplate(
+                      icon: Icons.warning_amber,
+                      iconStyle: IconThemeData(color: Colors.red, size: 16),
+                      description: 'With Semantics',
+                      descriptionStyle: TextStyle(color: Colors.red),
+                      ios: 'TODO',
+                      chrome: 'TODO',
+                      safari: 'TODO',
+                    ),
+                    const CodeSnippetTemplate(
+                      code: '''Semantics(
+  label: 'Change the color of the pages background',
+  child: ElevatedButton(
+    child: Text('Change Background'),
+  ),
+)''',
+                    ),
+                  ],
+                ),
+              ),
+
+              const SizedBox(width: 24),
+
+              // ElevatedButton: Semantics + role
+              Expanded(
+                child: Column(
+                  spacing: 16,
+                  children: [
+                    Semantics(
+                      label: 'Change the color of the pages background',
                       button: true,
                       child: ElevatedButton(
                         onPressed: widget.onChangeTheme,
                         child: const Text('Change Background'),
                       ),
+                    ),
+
+                    const ATDescriptionTemplate(
+                      icon: Icons.warning_amber,
+                      iconStyle: IconThemeData(color: Colors.red, size: 16),
+                      description: 'With Semantics + Role',
+                      descriptionStyle: TextStyle(color: Colors.red),
+                      ios: 'TODO',
+                      chrome: 'TODO',
+                      safari: 'TODO',
+                    ),
+                    const CodeSnippetTemplate(
+                      code: '''Semantics(
+  label: 'Change the color of the pages background',
+  button: true,
+  child: ElevatedButton(
+    child: Text('Change Background'),
+  ),
+)''',
+                    ),
+                  ],
+                ),
+              ),
+
+              const SizedBox(width: 24),
+
+              // ElevatedButton: Semantics + role
+              Expanded(
+                child: Column(
+                  spacing: 16,
+                  children: [
+                    Semantics(
+                      label: 'Change the color of the pages background',
+                      button: true,
+                      child: ElevatedButton(
+                        onPressed: widget.onChangeTheme,
+                        child: const Text('Change Background'),
+                      ),
+                    ),
+                    const ATDescriptionTemplate(
+                      icon: Icons.warning_amber,
+                      iconStyle: IconThemeData(color: Colors.red, size: 16),
+                      descriptionStyle: TextStyle(color: Colors.red),
+                      description: 'With Semantics + Role',
+                      ios: 'TODO',
+                      chrome: 'TODO',
+                      safari: 'TODO',
+                    ),
+                    const CodeSnippetTemplate(
+                      code: '''Semantics(
+  label: 'Change the color of the pages background',
+  button: true,
+  child: ElevatedButton(
+    child: Text('Change Background'),
+  ),
+)''',
                     ),
                   ],
                 ),
@@ -167,7 +375,9 @@ class _ButtonPageState extends State<ButtonPage> {
             ],
           ),
 
-          // Section Intro Text
+          // ---------------------------------------------------------------------------
+          // Floating Action Buttons
+          // ---------------------------------------------------------------------------
           Semantics(
             header: true,
             child: Text(
@@ -179,7 +389,7 @@ class _ButtonPageState extends State<ButtonPage> {
           Row(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              // Left side
+              // FAB: Tooltip only
               Expanded(
                 child: Column(
                   spacing: 16,
@@ -191,26 +401,20 @@ class _ButtonPageState extends State<ButtonPage> {
                       onPressed: widget.onChangeTheme,
                       child: const Icon(Icons.color_lens_rounded),
                     ),
-                  ],
-                ),
-              ),
-
-              const SizedBox(width: 24),
-
-              // Right side
-              Expanded(
-                child: Column(
-                  spacing: 16,
-                  children: [
-                    const Text('With Semantics'),
-                    Semantics(
-                      label: 'Change Background With Semantics No Tooltip',
-                      button: true,
-                      child: FloatingActionButton(
-                        heroTag: 'With Semantics',
-                        onPressed: widget.onChangeTheme,
-                        child: const Icon(Icons.color_lens_rounded),
-                      ),
+                    const ATDescriptionTemplate(
+                      icon: Icons.check_circle_outline_outlined,
+                      iconStyle: IconThemeData(color: Colors.green),
+                      description: 'Tooltip',
+                      ios: 'TODO',
+                      chrome: 'TODO',
+                      safari: 'TODO',
+                    ),
+                    const CodeSnippetTemplate(
+                      code: '''FloatingActionButton(
+  heroTag: 'No Semantics',
+  tooltip: 'Change Background Color',
+  child: Icon(Icons.color_lens_rounded),
+)''',
                     ),
                   ],
                 ),
@@ -218,13 +422,92 @@ class _ButtonPageState extends State<ButtonPage> {
 
               const SizedBox(width: 24),
 
+              // FAB: Semantics + role
               Expanded(
                 child: Column(
                   spacing: 16,
                   children: [
-                    const Text('With Both Semantics and Tooltip'),
                     Semantics(
-                      label: 'Change Background With Semantics and Tooltip',
+                      label: 'Change the color of the pages background',
+                      button: true,
+                      child: FloatingActionButton(
+                        heroTag: 'Semantics',
+                        onPressed: widget.onChangeTheme,
+                        child: const Icon(Icons.color_lens_rounded),
+                      ),
+                    ),
+                    const ATDescriptionTemplate(
+                      icon: Icons.warning_amber,
+                      iconStyle: IconThemeData(color: Colors.red, size: 16),
+                      description: 'Semantics + Role',
+                      descriptionStyle: TextStyle(color: Colors.red),
+                      ios: 'TODO',
+                      chrome: 'TODO',
+                      safari: 'TODO',
+                    ),
+                    const CodeSnippetTemplate(
+                      code: '''Semantics(
+  label: 'Change the color of the pages background',
+  button: true,
+  child: FloatingActionButton(
+    heroTag: 'Semantics',
+    child: Icon(Icons.color_lens_rounded),
+  ),
+)''',
+                    ),
+                  ],
+                ),
+              ),
+
+              const SizedBox(width: 24),
+
+              // FAB: Semantics + tooltip
+              Expanded(
+                child: Column(
+                  spacing: 16,
+                  children: [
+                    Semantics(
+                      label: 'Change the color of the pages background',
+                      child: FloatingActionButton(
+                        heroTag: 'With Semantics and Tooltip',
+                        tooltip: 'Change Background Color',
+                        onPressed: widget.onChangeTheme,
+                        child: const Icon(Icons.color_lens_rounded),
+                      ),
+                    ),
+
+                    const ATDescriptionTemplate(
+                      icon: Icons.warning_amber,
+                      iconStyle: IconThemeData(color: Colors.red, size: 16),
+                      description: 'Semantics + Tooltip',
+                      descriptionStyle: TextStyle(color: Colors.red),
+                      ios: 'TODO',
+                      chrome: 'TODO',
+                      safari: 'TODO',
+                    ),
+                    const CodeSnippetTemplate(
+                      code: '''Semantics(
+  label: 'Change the color of the pages background',
+  child: FloatingActionButton(
+    heroTag: 'With Semantics and Tooltip',
+    tooltip: 'Change Background Color',
+    child: Icon(Icons.color_lens_rounded),
+  ),
+)''',
+                    ),
+                  ],
+                ),
+              ),
+
+              const SizedBox(width: 24),
+
+              // FAB: Semantics + role + tooltip
+              Expanded(
+                child: Column(
+                  spacing: 16,
+                  children: [
+                    Semantics(
+                      label: 'Change the color of the pages background',
                       button: true,
                       child: FloatingActionButton(
                         heroTag: 'With Both',
@@ -232,6 +515,26 @@ class _ButtonPageState extends State<ButtonPage> {
                         onPressed: widget.onChangeTheme,
                         child: const Icon(Icons.color_lens_rounded),
                       ),
+                    ),
+                    const ATDescriptionTemplate(
+                      icon: Icons.warning_amber,
+                      iconStyle: IconThemeData(color: Colors.red, size: 16),
+                      description: 'Semantics + Role + Tooltip',
+                      descriptionStyle: TextStyle(color: Colors.red),
+                      ios: 'TODO',
+                      chrome: 'TODO',
+                      safari: 'TODO',
+                    ),
+                    const CodeSnippetTemplate(
+                      code: '''Semantics(
+  label: 'Change the color of the pages background',
+  button: true,
+  child: FloatingActionButton(
+    heroTag: 'With Both',
+    tooltip: 'Change Background Color',
+    child: Icon(Icons.color_lens_rounded),
+  ),
+)''',
                     ),
                   ],
                 ),
@@ -243,3 +546,85 @@ class _ButtonPageState extends State<ButtonPage> {
     );
   }
 }
+
+/* // Proof-of-concept: MergeSemantics + Semantics
+              Expanded(
+                child: Column(
+                  spacing: 16,
+                  children: [
+                    MergeSemantics(
+                      child: Semantics(
+                        label: 'Learn more about Disney World',
+                        child: ElevatedButton(
+                          onPressed: widget.onChangeTheme,
+                          child: const Text('Learn More'),
+                        ),
+                      ),
+                    ),
+                    const ATDescriptionTemplate(
+                      description: 'MergeSemantics + Semantics',
+                      icon: Icons.info_outline_rounded,
+                      iconStyle: IconThemeData(color: Colors.orange),
+                      ios: 'TODO',
+                      chrome: 'TODO',
+                      safari: 'TODO',
+                    ),
+                    const CodeSnippetTemplate(
+                      code: '''MergeSemantics(
+  child: Semantics(
+    label: 'Learn more about Disney World',
+    child: ElevatedButton(
+      onPressed: widget.onChangeTheme,
+      child: Text('Learn More'),
+    ),
+  ),
+)''',
+                    ),
+                  ],
+                ),
+              ),
+
+              const SizedBox(width: 24),
+              
+
+              // Proof-of-concept: Semantics + ExcludeSemantics
+              Expanded(
+                child: Column(
+                  spacing: 16,
+                  children: [
+                    Semantics(
+                      label: 'Learn more about Disney World',
+                      button: true,
+                      child: ExcludeSemantics(
+                        child: ElevatedButton(
+                          onPressed: widget.onChangeTheme,
+                          child: const Text('Learn More'),
+                        ),
+                      ),
+                    ),
+                    const ATDescriptionTemplate(
+                      description: 'Semantics + ExcludeSemantics',
+                      icon: Icons.info_outline_rounded,
+                      iconStyle: IconThemeData(color: Colors.orange),
+                      ios: 'TODO',
+                      chrome: 'TODO',
+                      safari: 'TODO',
+                    ),
+                    const CodeSnippetTemplate(
+                      code: '''Semantics(
+  label: 'Learn more about Disney World',
+  button: true,
+  child: ExcludeSemantics(
+    child: ElevatedButton(
+      onPressed: widget.onChangeTheme,
+      child: Text('Learn More'),
+    ),
+  ),
+)''',
+                    ),
+                  ],
+                ),
+              ),
+            ],
+          ),
+          */
